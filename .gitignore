@@ -85,6 +85,13 @@ target/
 __pycache__/
 local_settings.py
 
+## Ignore Migrations ##
+# Having these files in the repo causes issues after switching branches and such
+# Running App Containers must have their own synced migrations folder
+app/migrations/*
+!app/migrations/__init__.py
+
+
 .env
 db.sqlite3
 
