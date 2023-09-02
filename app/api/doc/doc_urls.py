@@ -13,5 +13,7 @@ urlpatterns = [
         version="1.0.0"
     ), name='openapi-schema'),
     # Swagger View
-    path('docs/', doc_endpoints.SwaggerView.as_view(), name='swagger-ui'),
+    path('swagger/', doc_endpoints.SwaggerView.as_view(), name='swagger-ui'),
+    # Root View
+    path('', doc_endpoints.RootDocView.as_view(), name='docs'),
 ]

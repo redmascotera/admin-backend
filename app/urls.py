@@ -1,8 +1,9 @@
 """App Urls"""
 
-# Load all the api urls here
-from app.api.doc import doc_urls
+from django.urls import path, include
 
-# Create URL Patterns and extend with all the api urls
-urlpatterns = []
-urlpatterns.extend(doc_urls.urlpatterns)
+
+urlpatterns = [
+    # API Endpoints
+    path('api/', include('app.api.urls')),
+]
