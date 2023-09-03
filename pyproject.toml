@@ -10,11 +10,10 @@ packages = [{include = "red_mascotera"}]
 python = "^3.11"
 django = "^4.2.4"
 djangorestframework = "^3.14.0"
-pyyaml = "^6.0.1"
-uritemplate = "^4.1.1"
 django-environ = "^0.11.2"
 django-allauth = "^0.55.2"
 djangorestframework-simplejwt = {version = "^5.3.0", extras = ["crypto"]}
+drf-yasg = {version = "^1.21.7", extras = ["validation"]}
 
 
 [tool.poetry.group.dev.dependencies]
