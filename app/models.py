@@ -9,6 +9,22 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
 
+class TimestampedModel(models.Model):
+    """Timestamped Model"""
+
+    created_at = models.DateTimeField(
+        _("creado"),
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        _("actualizado"),
+        auto_now=True,
+    )
+
+    class Meta:
+        abstract = True
+
+
 class UserManager(BaseUserManager):
     """Custom User Manager"""
 
@@ -52,11 +68,81 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    """Custom User Model"""
+
     username = None
-    email = models.EmailField(_("email address"), unique=True)
+    email = models.EmailField(_("email"), unique=True)
 
     # Set the custom user manager
     objects = UserManager()
     # Set the email as the USERNAME_FIELD
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+
+class Owner(TimestampedModel):
+    """Pet Owner"""
+
+    user = models.OneToOneField(
+        User,
+        related_name="owner",
+        verbose_name=_("usuario"),
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    name = models.CharField(
+        _("nombre"),
+        max_length=80,
+    )
+    phone = models.CharField(
+        _("telefono"),
+        max_length=80,
+        blank=True,
+        default="",
+    )
+    alt_phone = models.CharField(
+        _("telefono alternativo"),
+        max_length=80,
+        blank=True,
+        default="",
+    )
+
+
+class Pet(TimestampedModel):
+    """Pet Model"""
+
+    name = models.CharField(
+        _("nombre"),
+        max_length=80,
+    )
+    owner = models.ForeignKey(
+        Owner,
+        related_name="pets",
+        verbose_name=_("dueño"),
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
+
+class PetTag(TimestampedModel):
+    """Pet Tag Model"""
+
+    pet = models.OneToOneField(
+        Pet,
+        related_name="tag",
+        verbose_name=_("mascota"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+    )
+    tag = models.CharField(
+        _("chapa"),
+        max_length=80,
+        unique=True,
+    )
+    code = models.CharField(
+        _("codigo"),
+        max_length=80,
+        blank=True,
+    )
