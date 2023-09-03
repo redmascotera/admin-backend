@@ -1,7 +1,7 @@
 """Owners ViewSet"""
 
 from rest_framework import (
-    permissions,
+    # permissions,
     viewsets,
 )
 

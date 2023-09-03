@@ -1,6 +1,9 @@
 """Pet ViewSets"""
 
-from rest_framework import viewsets, permissions
+from rest_framework import (
+    viewsets,
+    # permissions,
+)
 
 from app import models
 from app.api.pet import pet_serializers
