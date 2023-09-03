@@ -83,13 +83,6 @@ class User(AbstractUser):
 class Owner(TimestampedModel):
     """Pet Owner"""
 
-    user = models.OneToOneField(
-        User,
-        related_name="owner",
-        verbose_name=_("usuario"),
-        on_delete=models.SET_NULL,
-        null=True,
-    )
     name = models.CharField(
         _("nombre"),
         max_length=80,
