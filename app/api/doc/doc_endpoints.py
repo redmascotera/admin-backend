@@ -11,5 +11,5 @@ class SwaggerView(TemplateView):
 
 class RootDocView(RedirectView):
     """Redirects to the default OpenAPI UI"""
-    def get_redirect_url(self, *args, **kwargs):
+    def get_redirect_url(self):
         return reverse('swagger-ui')
