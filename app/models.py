@@ -87,6 +87,11 @@ class Owner(TimestampedModel):
         _("nombre"),
         max_length=80,
     )
+    email = models.EmailField(
+        _("email"),
+        blank=True,
+        default="",
+    )
     phone = models.CharField(
         _("telefono"),
         max_length=80,
