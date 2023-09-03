@@ -13,7 +13,7 @@ class OwnerViewSet(viewsets.ModelViewSet):
     """Owner view set"""
 
     serializer_class = owner_serializers.OwnerSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         """Returns the queryset filtered by the user"""

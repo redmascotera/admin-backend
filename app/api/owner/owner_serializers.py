@@ -12,4 +12,5 @@ class OwnerSerializer(serializers.ModelSerializer):
         """Meta Class"""
 
         model = Owner
-        fields = ("name", "email", "phone", "alt_phone")
+        fields = ("id", "name", "email", "phone", "alt_phone")
+        read_only_fields = ("id",)

@@ -9,22 +9,26 @@ from app.api.owner import owner_serializers
 class PetSerializer(serializers.ModelSerializer):
     """Pet Serializer"""
 
-    owner = owner_serializers.OwnerSerializer()
+    owner = owner_serializers.OwnerSerializer(allow_null=True, required=False, default=None)
+    owner_id = serializers.IntegerField(write_only=True, required=False, default=None)
 
     class Meta:
         """Meta Class"""
 
         model = models.Pet
-        fields = ("name", "owner")
+        fields = ("id", "name", "owner", "owner_id")
+        read_only_fields = ("id", "owner")
 
 
 class PetTagSerializer(serializers.ModelSerializer):
     """Pet Tag Serializer"""
 
-    pet = PetSerializer()
+    pet = PetSerializer(allow_null=True, required=False, default=None)
+    pet_id = serializers.IntegerField(write_only=True, required=False, default=None)
 
     class Meta:
         """Meta Class"""
 
         model = models.PetTag
-        fields = ("tag", "code", "pet")
+        fields = ("id", "tag", "code", "pet", "pet_id")
+        read_only_fields = ("id", "pet")
