@@ -6,10 +6,12 @@ from django.shortcuts import reverse
 
 class SwaggerView(TemplateView):
     """Swagger UI view"""
-    template_name = 'swagger-ui.html'
+
+    template_name = "swagger-ui.html"
 
 
 class RootDocView(RedirectView):
     """Redirects to the default OpenAPI UI"""
+
     def get_redirect_url(self):
-        return reverse('swagger-ui')
+        return reverse("swagger-ui")

@@ -16,8 +16,8 @@ from app.api.doc import doc_urls
 
 # Include the api urls modules in the urlpatterns
 urlpatterns = [
-    path('docs/', include(doc_urls.urlpatterns)),
+    path("docs/", include(doc_urls.urlpatterns)),
     # JWT Endpoints
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
