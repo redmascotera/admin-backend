@@ -17,6 +17,13 @@
 5. Run `python manage.py makemigrations` to create the migrations
 6. Run `python manage.py migrate` to run migrations
 7. Finally `python manage.py runserver` to start the development server
+8. Install pre-commit hooks with `pre-commit install`
+
+### Do not forget to run `pre-commit install` to install your pre-commit hooks
+
+### Running Tests
+
+1. Run `python manage.py test` to run all tests
 
 
 ## Project Structure
@@ -28,3 +35,17 @@
 |-  | api <--- API Endpoints
 |-  | models <--- Database Models
 ```
+
+## Contributing
+
+### Branch Name Structure
+
+`<your-username>/type-titleWithCamelCase`
+
+Example: `johndoe/feature-addUserModel`
+
+### Coding Style
+
+- PEP8. PyCharm professional users will have this as default. VSCode users need to setup pylint and black.
+- PyLint (with the provided `.pylintrc` file) **This is not provided yet**
+- Black (with the provided `pyproject.toml` file) **This is not provided yet**
