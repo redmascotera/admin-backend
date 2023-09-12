@@ -47,5 +47,5 @@ Example: `johndoe/feature-addUserModel`
 ### Coding Style
 
 - PEP8. PyCharm professional users will have this as default. VSCode users need to setup pylint and black.
-- PyLint (with the provided `.pylintrc` file) **This is not provided yet**
-- Black (with the provided `pyproject.toml` file) **This is not provided yet**
+- PyLint (with the provided `.pylintrc` file)
+- Black (with the provided `pyproject.toml` file) 
