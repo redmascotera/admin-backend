@@ -91,7 +91,7 @@ def import_row(row: list[str]):
         tag.owner = owner
     # create the pet if present
     if pet_name:
-        logger.info("Creating Pet ", pet_name)
+        logger.info("Creating Pet %s", pet_name)
         pet = models.Pet.objects.create(
             name=pet_name,
             owner=owner,
