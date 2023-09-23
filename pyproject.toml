@@ -21,6 +21,10 @@ pylint = "^2.17.5"
 black = "^23.7.0"
 pre-commit = "^3.4.0"
 
+
+[tool.poetry.group.prod.dependencies]
+uwsgi = "^2.0.22"
+
 [tool.black]
 line-length = 100
 target-version = ['py311']
