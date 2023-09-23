@@ -79,6 +79,9 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    def __str__(self):
+        return self.email
+
 
 class Phone(TimestampedModel):
     phone = models.CharField(
@@ -86,6 +89,9 @@ class Phone(TimestampedModel):
         max_length=80,
         unique=True,
     )
+
+    def __str__(self):
+        return self.phone
 
 
 class Owner(TimestampedModel):
@@ -108,6 +114,9 @@ class Owner(TimestampedModel):
         related_name="owners",
         verbose_name=_("telefonos"),
     )
+
+    def __str__(self):
+        return self.name or self.email
 
 
 class Pet(TimestampedModel):
@@ -168,3 +177,6 @@ class PetTag(TimestampedModel):
         related_name="tags",
         verbose_name=_("telefonos"),
     )
+
+    def __str__(self):
+        return self.tag
