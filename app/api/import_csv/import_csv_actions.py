@@ -49,7 +49,7 @@ def import_row(row: list[str]):
     if not tag_str:
         logger.info("Skipping empty tag")
         return
-    logger.info(f"Get or create tag {tag_str}")
+    logger.info("Get or create tag %s", tag_str)
     tag, _ = models.PetTag.objects.get_or_create(
         tag=tag_str,
         defaults={
@@ -58,24 +58,24 @@ def import_row(row: list[str]):
     )
     # Prepare Phones if they exist
     if phone_str:
-        logger.info(f"Get or create phone {phone_str}")
+        logger.info("Get or create phone %s", phone_str)
         phone, _ = models.Phone.objects.get_or_create(
             phone=phone_str,
         )
         if phone not in tag.phones.all():
-            logger.info(f"Add phone {phone_str} to tag {tag_str}")
+            logger.info("Add phone %s to tag %s", phone_str, tag_str)
             tag.phones.add(phone)
     if alt_phone_str:
-        logger.info(f"Get or create alt phone {alt_phone_str}")
+        logger.info("Get or create alt phone %s", alt_phone_str)
         alt_phone, _ = models.Phone.objects.get_or_create(
             phone=alt_phone_str,
         )
         if alt_phone not in tag.phones.all():
-            logger.info(f"Add alt phone {alt_phone_str} to tag {tag_str}")
+            logger.info("Add alt phone %s to tag %s", alt_phone_str, tag_str)
             tag.phones.add(alt_phone)
     # Get or create the owner
     if owner_name:
-        logger.info(f"Get or create owner {owner_name}")
+        logger.info("Get or create owner %s", owner_name)
         owner, _ = models.Owner.objects.get_or_create(
             name=owner_name,
             defaults={
@@ -83,20 +83,20 @@ def import_row(row: list[str]):
             },
         )
         if phone and phone not in owner.phones.all():
-            logger.info(f"Add phone {phone_str} to owner {owner_name}")
+            logger.info("Add phone %s to owner %s", phone_str, owner_name)
             owner.phones.add(phone)
         if alt_phone and alt_phone not in owner.phones.all():
-            logger.info(f"Add alt phone {alt_phone_str} to owner {owner_name}")
+            logger.info("Add alt phone %s to owner %s", alt_phone_str, owner_name)
             owner.phones.add(alt_phone)
         tag.owner = owner
     # create the pet if present
     if pet_name:
-        logger.info(f"Creating Pet {pet_name}")
+        logger.info("Creating Pet ", pet_name)
         pet = models.Pet.objects.create(
             name=pet_name,
             owner=owner,
         )
         tag.pet = pet
     # Save the tag
-    logger.info(f"Saving tag {tag_str}")
+    logger.info("Saving tag %s", tag_str)
     tag.save()
