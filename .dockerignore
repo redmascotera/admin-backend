@@ -1,0 +1,9 @@
+.github
+.env
+app/migrations/*
+!app/migrations/__init__.py
+*.pyc
+db.sqlite3
+.pre-commit-config.yaml
+README.md
+poetry.lock

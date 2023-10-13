@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+        context: ./.deploy/nginx
+        dockerfile: Dockerfile
+    container_name: nginx
+    volumes:
+      - admin_www_data:/var/www/html/static:r
+      - admin_uwsgi_data:/tmp/uwsgi:rw
+    ports:
+      - "8080:80"
+
+  admin:
+    build:
+        context: .
+        dockerfile: ./Dockerfile
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@database:5432/admin_app
+      - SECRET_KEY=django-insecure
+    volumes:
+      - admin_migrations_data:/app/migrations:rw
+      - admin_www_data:/var/www/html/static:rw
+      - admin_uwsgi_data:/tmp/uwsgi:rw
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16.0-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=admin_app
+    volumes:
+      - admin_postgresql_data:/var/lib/postgresql/data
+    expose:
+      - 5432
+
+volumes:
+  admin_postgresql_data:
+  admin_migrations_data:
+  admin_www_data:
+  admin_uwsgi_data:
