@@ -5,7 +5,7 @@ services:
     build:
         context: ./.deploy/nginx
         dockerfile: Dockerfile
-    container_name: nginx
+    container_name: admin-backend-nginx
     volumes:
       - admin_www_data:/var/www/html/static:r
       - admin_uwsgi_data:/tmp/uwsgi:rw

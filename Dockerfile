@@ -16,7 +16,7 @@ COPY pyproject.toml /app/
 
 # Install dependencies with poetry
 RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi --extras "production"
+  && poetry install --no-interaction --no-ansi --extras "production"
 
 # Copy entrypoint
 COPY ./entrypoint.sh /app/entrypoint.sh
