@@ -19,6 +19,9 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:postgres@database:5432/admin_app
       - SECRET_KEY=django-insecure
+      - ALLOWED_HOSTS=*
+      - STATIC_ROOT=/var/www/html/static
+      - DEBUG=on
     volumes:
       - admin_migrations_data:/app/migrations:rw
       - admin_www_data:/var/www/html/static:rw
