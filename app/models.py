@@ -79,6 +79,20 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    def __str__(self):
+        return self.email
+
+
+class Phone(TimestampedModel):
+    phone = models.CharField(
+        _("telefono"),
+        max_length=80,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.phone
+
 
 class Owner(TimestampedModel):
     """Pet Owner"""
@@ -86,24 +100,23 @@ class Owner(TimestampedModel):
     name = models.CharField(
         _("nombre"),
         max_length=80,
+        blank=True,
+        default="",
     )
     email = models.EmailField(
         _("email"),
         blank=True,
         default="",
     )
-    phone = models.CharField(
-        _("telefono"),
-        max_length=80,
-        blank=True,
-        default="",
+
+    phones = models.ManyToManyField(
+        Phone,
+        related_name="owners",
+        verbose_name=_("telefonos"),
     )
-    alt_phone = models.CharField(
-        _("telefono alternativo"),
-        max_length=80,
-        blank=True,
-        default="",
-    )
+
+    def __str__(self):
+        return self.name or self.email
 
 
 class Pet(TimestampedModel):
@@ -119,15 +132,29 @@ class Pet(TimestampedModel):
         verbose_name=_("dueño"),
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
+        default=None,
     )
+
+    def __str__(self):
+        return self.name
 
 
 class PetTag(TimestampedModel):
     """Pet Tag Model"""
 
+    owner = models.ForeignKey(
+        Owner,
+        related_name="tags",
+        verbose_name=_("dueño"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+    )
     pet = models.OneToOneField(
         Pet,
-        related_name="tag",
+        related_name="tags",
         verbose_name=_("mascota"),
         on_delete=models.SET_NULL,
         null=True,
@@ -143,4 +170,13 @@ class PetTag(TimestampedModel):
         _("codigo"),
         max_length=80,
         blank=True,
+        default="",
     )
+    phones = models.ManyToManyField(
+        Phone,
+        related_name="tags",
+        verbose_name=_("telefonos"),
+    )
+
+    def __str__(self):
+        return self.tag

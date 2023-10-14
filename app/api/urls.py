@@ -18,6 +18,8 @@ from app.api.doc import doc_urls
 from app.api.owner import owner_viewsets
 from app.api.pet import pet_viewsets
 
+# from app.api.import_csv import import_csv_views
+
 # Create a router and register the viewsets
 router = routers.SimpleRouter()
 router.register("owners", owner_viewsets.OwnerViewSet, basename="owners")
@@ -27,6 +29,9 @@ router.register("pet-tags", pet_viewsets.PetTagViewSet, basename="pet_tags")
 
 # Include the api urls modules in the urlpatterns
 urlpatterns = [
+    # Import CSV
+    # path("import-csv/", import_csv_views.ImportPetTagCSVView.as_view(), name="import_csv"),
+    # DOCS
     path("docs/", include(doc_urls.urlpatterns)),
     # JWT Endpoints
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),

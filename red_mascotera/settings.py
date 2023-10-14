@@ -18,6 +18,8 @@ import environ  # noqa
 # Create the environment and add variables that need default
 env = environ.Env(
     DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, []),
+    INSTALLED_APPS=(list, []),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,7 +38,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -56,6 +58,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "app.apps.AppConfig",
 ]
+INSTALLED_APPS.extend(env("INSTALLED_APPS"))
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -118,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "es-la"
 
 TIME_ZONE = "UTC"
 
@@ -139,6 +142,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Custom User Model
 AUTH_USER_MODEL = "app.User"
+
+# Static Files for Development/Production Servers
+STATIC_ROOT = env("STATIC_ROOT", default=None)
 
 # Rest Framework Settings
 REST_FRAMEWORK = {
